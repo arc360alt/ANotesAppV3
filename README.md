@@ -14,7 +14,6 @@ Server runs on `http://0.0.0.0:2142` by default.
 ```bash
 npm create vite@latest . -- --template react
 npm install
-# Copy src/ files over
 npm run dev
 ```
 

@@ -139,7 +139,7 @@ export function SettingsModule({ settings, updateSettings, data, setData }) {
         ? `✓ Uploaded at ${new Date().toLocaleTimeString()}`
         : `✗ ${result.error}`);
     } catch {
-      setSyncStatus("⚠ Server unreachable — data saved locally");
+      setSyncStatus("⚠ Server unreachable, saving localy");
     }
   };
 
@@ -326,6 +326,8 @@ export function SettingsModule({ settings, updateSettings, data, setData }) {
           </div>
         </div>
       </Modal>
+      <p>Still want the old A Notes App Version? Go here: (Will not have cloud data anymore)</p>
+      <a href="https://anotesapp-web.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: t.accent }}>https://anotesapp.arc360hub.com/</a>
     </div>
   );
 }
