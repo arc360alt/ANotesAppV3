@@ -169,7 +169,7 @@ export function SettingsModule({ settings, updateSettings, data, setData }) {
 
   return (
     <div style={{ flex: 1, overflowY: "auto", padding: "32px" }}>
-      <div style={{ maxWidth: 580 }}>
+      <div style={{ maxWidth: 9000 }}>
         <h2 style={{ color: t.text, marginTop: 0, marginBottom: "28px", fontWeight: 700 }}>Settings</h2>
 
         <SettingSection title="Appearance">
@@ -298,6 +298,14 @@ export function SettingsModule({ settings, updateSettings, data, setData }) {
           )}
         </SettingSection>
 
+        <SettingSection title="Old App">
+          <SettingRow label="Still want to use the old app? Go here — syncing and any server contact will not work.">
+            <Button onClick={() => window.open("https://anotesapp-web.vercel.app/", "_blank")}>
+              Open Old App
+            </Button>
+          </SettingRow>
+        </SettingSection>
+
         <Button variant={saved ? "default" : "primary"} onClick={save}>
           {saved ? "✓ Saved!" : <><Icon name="check" size={14} color="white" /> Save Settings</>}
         </Button>
@@ -326,8 +334,6 @@ export function SettingsModule({ settings, updateSettings, data, setData }) {
           </div>
         </div>
       </Modal>
-      <p>Still want the old A Notes App Version? Go here: (Will not have cloud data anymore)</p>
-      <a href="https://anotesapp-web.vercel.app/" target="_blank" rel="noopener noreferrer" style={{ color: t.accent }}>https://anotesapp.arc360hub.com/</a>
     </div>
   );
 }
