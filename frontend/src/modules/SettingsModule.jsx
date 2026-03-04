@@ -306,6 +306,37 @@ export function SettingsModule({ settings, updateSettings, data, setData }) {
           </SettingRow>
         </SettingSection>
 
+        <SettingSection title="Desktop App">
+          <SettingRow label="Download the latest desktop build for your platform.">
+            <div style={{ display: "flex", gap: "8px" }}>
+              <Button onClick={async () => {
+                const res = await fetch("https://api.github.com/repos/arc360alt/ANotesAppV3/releases/latest");
+                const data = await res.json();
+                const asset = data.assets?.find(a => a.name.endsWith(".exe"));
+                if (asset) window.open(asset.browser_download_url, "_blank");
+              }}>
+                Windows
+              </Button>
+              <Button onClick={async () => {
+                const res = await fetch("https://api.github.com/repos/arc360alt/ANotesAppV3/releases/latest");
+                const data = await res.json();
+                const asset = data.assets?.find(a => a.name.endsWith(".AppImage"));
+                if (asset) window.open(asset.browser_download_url, "_blank");
+              }}>
+                Linux
+              </Button>
+              <Button onClick={async () => {
+                const res = await fetch("https://api.github.com/repos/arc360alt/ANotesAppV3/releases/latest");
+                const data = await res.json();
+                const asset = data.assets?.find(a => a.name.endsWith(".dmg"));
+                if (asset) window.open(asset.browser_download_url, "_blank");
+              }}>
+                macOS
+              </Button>
+            </div>
+          </SettingRow>
+        </SettingSection>
+
         <Button variant={saved ? "default" : "primary"} onClick={save}>
           {saved ? "✓ Saved!" : <><Icon name="check" size={14} color="white" /> Save Settings</>}
         </Button>
