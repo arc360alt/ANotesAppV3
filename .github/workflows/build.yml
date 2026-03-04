@@ -49,6 +49,14 @@ jobs:
           npm install
           npm run build
 
+      - name: Copy frontend dist (unix)
+        if: runner.os != 'Windows'
+        run: cp -r frontend/dist electron/frontend
+
+      - name: Copy frontend dist (windows)
+        if: runner.os == 'Windows'
+        run: xcopy /E /I /Y frontend\dist electron\frontend
+
       - name: Build Electron
         working-directory: electron
         run: |

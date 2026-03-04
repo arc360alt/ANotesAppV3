@@ -29,11 +29,11 @@
       "titlebar.js"
     ],
     "extraFiles": [
-      {
-        "from": "../frontend/dist",
-        "to": "frontend"
-      }
-    ],
+        {
+          "from": "frontend",
+          "to": "frontend"
+        }
+      ],
     "win": { "target": "nsis" },
     "mac": { "target": "dmg" },
     "linux": { "target": "AppImage" }
