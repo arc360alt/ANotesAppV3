@@ -28,17 +28,17 @@ export const THEMES = {
     sidebarBg: "#FAFAFA",
   },
   midnight: {
-    bg: "#0A0A1A",
-    surface: "#12122A",
-    surface2: "#1A1A35",
-    surface3: "#22223F",
-    border: "#2A2A4A",
-    text: "#E0E0FF",
-    textSub: "#8888BB",
+    bg: "#0A0A0A",
+    surface: "#121212",
+    surface2: "#1A1A1A",
+    surface3: "#222222",
+    border: "#2A2A2A",
+    text: "#E0E0E0",
+    textSub: "#888888",
     accent: "#7C3AED",
     accentText: "#ffffff",
-    cardBg: "#16162E",
-    sidebarBg: "#0E0E22",
+    cardBg: "#161616",
+    sidebarBg: "#0E0E0E",
   },
 };
 
@@ -54,8 +54,40 @@ export const KANBAN_COL_COLORS = [
 
 export const FONT_SIZES = { small: "13px", medium: "15px", large: "17px" };
 
+function hexToRgb(hex) {
+  const h = hex.replace("#", "");
+  const n = parseInt(h.length === 3 ? h.split("").map(x => x + x).join("") : h, 16);
+  return { r: (n >> 16) & 255, g: (n >> 8) & 255, b: n & 255 };
+}
+
+function tintHex(baseHex, accentHex, strength = 0.18) {
+  const b = hexToRgb(baseHex);
+  const a = hexToRgb(accentHex);
+  const r = Math.round(b.r + (a.r - b.r) * strength);
+  const g = Math.round(b.g + (a.g - b.g) * strength);
+  const bl = Math.round(b.b + (a.b - b.b) * strength);
+  return `#${[r, g, bl].map(v => Math.min(255, Math.max(0, v)).toString(16).padStart(2, "0")).join("")}`;
+}
+
 export function resolveTheme(settings) {
   const base = THEMES[settings?.theme || "dark"] || THEMES.dark;
   const accent = settings?.accentColor || base.accent;
+
+  if ((settings?.theme || "dark") === "midnight") {
+    return {
+      bg:        tintHex("#0A0A0A", accent, 0.12),
+      surface:   tintHex("#121212", accent, 0.14),
+      surface2:  tintHex("#1A1A1A", accent, 0.14),
+      surface3:  tintHex("#222222", accent, 0.14),
+      border:    tintHex("#2A2A2A", accent, 0.20),
+      cardBg:    tintHex("#161616", accent, 0.14),
+      sidebarBg: tintHex("#0E0E0E", accent, 0.12),
+      text:      tintHex("#E0E0E0", accent, 0.15),
+      textSub:   tintHex("#888888", accent, 0.20),
+      accent,
+      accentText: "#ffffff",
+    };
+  }
+
   return { ...base, accent };
 }
