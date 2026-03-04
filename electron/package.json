@@ -3,6 +3,11 @@
   "version": "3.0.0",
   "description": "A Notes App V3 — Desktop",
   "main": "main.js",
+  "author": "your-name",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arc360alt/ANotesAppV3.git"
+  },
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
