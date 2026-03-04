@@ -20,7 +20,6 @@
   "build": {
     "appId": "com.anotes.v3",
     "productName": "A Notes App V3",
-    "asar": false,
     "directories": {
       "output": "dist"
     },
