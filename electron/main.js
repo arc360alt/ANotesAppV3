@@ -20,7 +20,7 @@ function createWindow() {
     show: false,
   });
 
-  const indexPath = app.isPackaged
+const indexPath = app.isPackaged
   ? path.join(process.resourcesPath, "frontend", "index.html")
   : path.join(__dirname, "..", "frontend", "dist", "index.html");
   win.loadFile(indexPath);
