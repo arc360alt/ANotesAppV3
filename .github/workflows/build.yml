@@ -38,13 +38,28 @@ jobs:
         run: npm run build
 
       # ── Build Electron ──────────────────────────────────────────────────────
+      - name: Cache Electron binary
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/electron
+            ~/AppData/Local/electron/Cache
+          key: electron-${{ runner.os }}-28.3.3
+
       - name: Install electron dependencies
         working-directory: electron
         run: npm install
+        env:
+          ELECTRON_GET_USE_PROXY: true
+          GLOBAL_AGENT_HTTPS_PROXY: ""
+        timeout-minutes: 15
 
       - name: Build Electron app
-        working-directory: electron
-        run: npm run build
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          command: cd electron && npm run build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
