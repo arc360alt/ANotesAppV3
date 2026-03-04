@@ -59,7 +59,8 @@ jobs:
         with:
           timeout_minutes: 15
           max_attempts: 3
-          command: cd electron && npm run build
+          working_directory: electron
+          command: npm run build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
